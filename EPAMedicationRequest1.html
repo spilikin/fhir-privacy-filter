@@ -1,0 +1,288 @@
+
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Test case</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" media="screen and (prefers-color-scheme: light)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" media="screen and (prefers-color-scheme: dark)">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/diff2html/bundles/js/diff2html-ui.min.js"></script>
+    
+    <link rel="stylesheet" href="reports.css">
+
+</head>
+<body>
+
+<div class="container my-5 centered-container">
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">gematik</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Privacy test cases
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        <li><a class="dropdown-item" href="index.html">Privacy filter PoC</a></li>
+                        
+                        <li><a class="dropdown-item" href="EPAMedicationRequest1.html">Privacy filter PoC: EPA Medication Request Example 1</a></li>
+                        
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<h2 class="mt-4 mb-4">Privacy filter PoC: EPA Medication Request Example 1</h2>
+
+<div id="bundleDiff">
+</div>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            const diffString = "--- FHIR.json\n+++ FHIR.json\n@@ -1,36 +1,33 @@\n {\n   \"resourceType\": \"Bundle\",\n   \"id\": \"example-epa-medication-request-1-bundle\",\n   \"type\": \"collection\",\n   \"entry\": [ {\n     \"resource\": {\n       \"resourceType\": \"MedicationRequest\",\n       \"id\": \"example-epa-medication-request-1\",\n       \"meta\": {\n         \"profile\": [ \"https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request\" ]\n       },\n       \"status\": \"active\",\n       \"intent\": \"plan\",\n       \"medicationReference\": {\n         \"reference\": \"Medication/example-epa-medication-1\"\n       },\n       \"subject\": {\n         \"identifier\": {\n           \"system\": \"http://fhir.de/sid/gkv/kvid-10\",\n-          \"value\": \"X123456789\"\n+          \"value\": \"89f0f2dd\"\n         }\n       },\n       \"authoredOn\": \"2024-05-04\",\n-      \"requester\": {\n-        \"reference\": \"PractitionerRole/example-epa-medication-request-1-requester\"\n-      },\n       \"dispenseRequest\": {\n         \"quantity\": {\n           \"value\": 3,\n           \"system\": \"http://unitsofmeasure.org\",\n           \"code\": \"{Package}\"\n         }\n       }\n     }\n   } ]\n }";
+            const targetElement = document.getElementById('bundleDiff');
+            var configuration = {
+                drawFileList: false,
+                fileListToggle: false,
+                fileListStartVisible: false,
+                fileContentToggle: false,
+                matching: 'lines',
+                outputFormat: 'side-by-side',
+                synchronisedScroll: true,
+                highlight: true,
+                colorScheme: 'dark',
+                renderNothingWhenEmpty: false,
+              };
+            const diff2htmlUi = new Diff2HtmlUI(targetElement, diffString, configuration);
+            diff2htmlUi.draw();
+            diff2htmlUi.highlightCode();
+        });
+    </script>
+    <div class="row">
+        <div class="col-xl-6">
+            <h4>Validation before filter</h4>
+            
+                <p class="text-success">Bundle is valid</p>
+            
+        </div>
+        <div class="col-xl-6">
+            <h4>Validation after filter</h4>
+            
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Severity</th>
+                        <th>Location</th>
+                        <th>Message</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    
+                        <tr>
+                            <td class="WARNING">WARNING</td>
+                            <td>MedicationRequest.subject.identifier.value</td>
+                            <td>Rule kvid-1: 'Der unveränderliche Teil der KVID muss 10-stellig sein und mit einem Großbuchstaben anfangen' Failed</td>
+                        </tr>
+                    
+                    </tbody>
+                </table>
+            
+            <h4 class="mt-4">Filtered values</h4>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Path</th>
+                    <th>Privacy Filter</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                    <tr>
+                        <td>MedicationRequest.subject.identifier</td>
+                        <td class="INFO">Pseudonymize</td>
+                    </tr>
+                
+                    <tr>
+                        <td>MedicationRequest.requester</td>
+                        <td class="INFO">Redact</td>
+                    </tr>
+                
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    
+    
+<h2 class="mt-4 mb-4">FHIR Shorthand</h2>
+<div>
+    <pre><code class="yaml"># FSH Source: input/fsh/profiles/EpaMedicationRequest.fsh
+Profile: EPAMedicationRequest
+Parent: MedicationRequest
+Id: epa-medication-request
+Title: "EPA MedicationRequest"
+Description: "Defines the medication request resource for the Medication Service in the ePA system."
+* insert Meta
+* identifier ^slicing.discriminator.type = #pattern
+* identifier ^slicing.discriminator.path = "$this"
+* identifier ^slicing.rules = #open
+* identifier ^slicing.description = "ePrescription identifier and overall transaction identifier"
+* identifier ^slicing.ordered = false
+* identifier 0..
+* identifier contains
+    RxPrescriptionProcessIdentifier 0..1 and
+    RxOriginatorProcessIdentifier 0..1
+* identifier[RxPrescriptionProcessIdentifier] only RxPrescriptionProcessIdentifier
+* identifier[RxPrescriptionProcessIdentifier] ^patternIdentifier.system = "https://gematik.de/fhir/epa-medication/sid/rx-prescription-process-identifier"
+* identifier[RxOriginatorProcessIdentifier] only RxOriginatorProcessIdentifier
+* identifier[RxOriginatorProcessIdentifier] ^patternIdentifier.system = "https://gematik.de/fhir/epa-medication/sid/rx-originator-process-identifier"
+* extension 0..
+  * ^slicing.discriminator.type = #value
+  * ^slicing.discriminator.path = "url"
+  * ^slicing.rules = #open
+* extension contains 
+    MultiplePrescriptionExtension named multiplePrescription 0..1 MS
+* extension[medicationRequestLinkedStatement].value[x]
+* extension[multiplePrescription]
+  * extension 1..
+  * extension ^slicing.discriminator.type = #value
+  * extension ^slicing.discriminator.path = "url"
+  * extension ^slicing.rules = #closed
+  * extension[indicator]
+    * ^sliceName = "indicator"
+    * ^mustSupport = true
+    * value[x] MS
+    * valueBoolean MS
+    * valueBoolean 
+      * ^sliceName = "valueBoolean"
+  * extension[counter] 
+    * ^sliceName = "counter"
+    * ^min = 0
+    * ^mustSupport = true
+    * value[x] MS
+    * valueRatio MS
+      * ^sliceName = "valueRatio"
+      * numerator MS
+      * numerator
+        * value MS
+      * denominator MS
+      * denominator
+        * value MS
+  * extension[period] 
+    * ^sliceName = "period"
+    * ^min = 0
+    * ^mustSupport = true
+    * value[x] MS
+    * valuePeriod MS
+      * ^sliceName = "valuePeriod"
+      * start MS
+      * end MS
+  * extension[id]
+    * ^sliceName = "id"
+    * ^min = 0
+    * ^mustSupport = true
+    * value[x] MS
+    * valueIdentifier MS
+      * ^sliceName = "valueIdentifier"
+      * system MS
+      * value MS
+* status from EPAMedicationRequestVS
+* intent MS
+* intent ^short = "filler-order"
+* intent ^definition = "When data is synchronized with the E-Rezept-Fachdienst, the 'filler-order' code should be used here."
+* subject 1..1 MS
+  * identifier 1..1 MS
+  * identifier only IdentifierKvid10
+    * insert PrivacyLabelPseudonymize
+* medication[x] only Reference
+* medicationReference MS
+* medicationReference only Reference(Medication)
+* requester MS
+* requester only Reference(PractitionerRole)
+  * insert PrivacyLabelRedact
+* authoredOn 1.. MS
+* authoredOn ^short = "Issue Date"
+* authoredOn ^definition = "Issue Date of the Prescriptio"
+* note ..1 MS
+* note.text MS
+* note.text ^short = "Dispensing Note"
+* note.text ^definition = "Instructions to the pharmacy that go beyond the dosage information"
+* dosageInstruction ..1 MS
+  * text MS
+  * text ^short = "Dosage Instructions"
+  * text ^definition = "Dosage Instructions of a Prescription"
+  * patientInstruction MS
+  * patientInstruction ^short = "Instructions for Use"
+  * patientInstruction ^definition = "Instructions for Use"
+* dispenseRequest 1.. MS
+  * quantity 1.. MS
+    * value 1.. MS
+    * value ^short = "Number of Prescribed Packages"
+    * value ^definition = "Number of Prescribed Packages"
+    * system 1.. MS
+    * system = "http://unitsofmeasure.org"
+    * code 1.. MS
+    * code = #{Package}
+* substitution MS
+* substitution.allowed[x] only boolean
+* substitution.allowedBoolean 1.. MS
+
+# FSH Source: input/fsh/examples/ExampleEpaMedicationRequest1.fsh
+Instance: ExampleEpaMedicationRequest1Requester
+InstanceOf: PractitionerRoleDirectory
+Usage: #example
+
+* id = "example-epa-medication-request-1-requester"
+* meta.tag[Origin].code = #ldap
+* practitioner.identifier.system = "https://gematik.de/fhir/sid/telematik-id"
+* practitioner.identifier.value = "1-10123456790"
+
+
+Instance: ExampleEpaMedicationRequest1
+InstanceOf: EPAMedicationRequest
+Usage: #example
+
+* id = "example-epa-medication-request-1"
+* status = medicationrequest-status#active
+* intent = http://hl7.org/fhir/CodeSystem/medicationrequest-intent#plan
+* medicationReference = Reference(ExampleEpaMedication1)
+* subject.identifier.value = "X123456789"
+* authoredOn = 2024-05-04
+* dispenseRequest.quantity.value = 3
+* requester = Reference(ExampleEpaMedicationRequest1Requester)
+
+Instance: ExampleEpaMedicationRequest1Bundle
+InstanceOf: Bundle
+Usage: #example
+
+* id = "example-epa-medication-request-1-bundle"
+* type = bundle-type#collection
+* entry[+].resource = ExampleEpaMedicationRequest1
+
+</code></pre>
+</div>
+
+    
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>hljs.highlightAll();</script>
+
+</body>
+</html>
