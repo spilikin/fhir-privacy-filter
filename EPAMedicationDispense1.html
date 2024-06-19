@@ -1,0 +1,220 @@
+
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Test case</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/diff2html/bundles/js/diff2html-ui.min.js"></script>
+    
+    <link rel="stylesheet" href="reports.css">
+
+</head>
+<body>
+
+<div class="container my-5 centered-container">
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">gematik</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Privacy test cases
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        <li><a class="dropdown-item" href="index.html">Privacy filter PoC</a></li>
+                        
+                        <li><a class="dropdown-item" href="EPAMedicationRequest1.html">Privacy filter PoC: EPA Medication Request</a></li>
+                        
+                        <li><a class="dropdown-item" href="EPAMedicationDispense1.html">Privacy filter PoC: EPA Medication Dispense</a></li>
+                        
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<h2 class="mt-4 mb-4">Privacy filter PoC: EPA Medication Dispense</h2>
+
+<div id="bundleDiff">
+</div>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            const diffString = "--- FHIR.json\n+++ FHIR.json\n@@ -1,30 +1,30 @@\n {\n   \"resourceType\": \"Bundle\",\n   \"id\": \"example-epa-medication-dispense-1-bundle\",\n   \"type\": \"collection\",\n   \"entry\": [ {\n     \"resource\": {\n       \"resourceType\": \"MedicationDispense\",\n       \"id\": \"example-epa-medication-dispense-1\",\n       \"meta\": {\n-        \"profile\": [ \"https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense\" ]\n+        \"profile\": [ \"https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense\" ],\n+        \"security\": [ {\n+          \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ObservationValue\",\n+          \"code\": \"PSEUDED\",\n+          \"display\": \"pseudonymized\"\n+        } ]\n       },\n       \"status\": \"completed\",\n       \"medicationReference\": {\n         \"reference\": \"ExampleMedication2\"\n       },\n       \"subject\": {\n         \"identifier\": {\n           \"system\": \"http://fhir.de/sid/gkv/kvid-10\",\n-          \"value\": \"X123456789\"\n+          \"value\": \"89f0f2dd\"\n         }\n       },\n-      \"performer\": [ {\n-        \"actor\": {\n-          \"reference\": \"Organization/example-epa-medication-dispense-1-performer\"\n-        }\n-      } ],\n       \"whenHandedOver\": \"2025-01-15\"\n     }\n   } ]\n }";
+            const targetElement = document.getElementById('bundleDiff');
+            var configuration = {
+                drawFileList: false,
+                fileListToggle: false,
+                fileListStartVisible: false,
+                fileContentToggle: false,
+                matching: 'lines',
+                outputFormat: 'side-by-side',
+                synchronisedScroll: true,
+                highlight: true,
+                colorScheme: 'dark',
+                renderNothingWhenEmpty: false,
+              };
+            const diff2htmlUi = new Diff2HtmlUI(targetElement, diffString, configuration);
+            diff2htmlUi.draw();
+            diff2htmlUi.highlightCode();
+        });
+    </script>
+    <div class="row">
+        <div class="col-xl-6">
+            <h4>Validation before filter</h4>
+            
+                <p class="text-success">Bundle is valid</p>
+            
+        </div>
+        <div class="col-xl-6">
+            <h4>Validation after filter</h4>
+            
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Severity</th>
+                        <th>Location</th>
+                        <th>Message</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    
+                        <tr>
+                            <td class="ERROR">ERROR</td>
+                            <td>MedicationDispense</td>
+                            <td>MedicationDispense.performer: minimum required = 1, but only found 0 (from https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense|1.0.0)</td>
+                        </tr>
+                    
+                        <tr>
+                            <td class="WARNING">WARNING</td>
+                            <td>MedicationDispense.subject.identifier.value</td>
+                            <td>Rule kvid-1: 'Der unveränderliche Teil der KVID muss 10-stellig sein und mit einem Großbuchstaben anfangen' Failed</td>
+                        </tr>
+                    
+                    </tbody>
+                </table>
+            
+            <h4 class="mt-4">Filtered values</h4>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Path</th>
+                    <th>Privacy Filter</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                    <tr>
+                        <td>MedicationDispense.subject.identifier</td>
+                        <td class="INFO">Pseudonymize</td>
+                    </tr>
+                
+                    <tr>
+                        <td>MedicationDispense.performer.actor</td>
+                        <td class="INFO">Redact</td>
+                    </tr>
+                
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    
+    
+<h2 class="mt-4 mb-4">FHIR Shorthand</h2>
+<div>
+    <pre><code class="yaml"># FSH Source: input/fsh/profiles/EpaMedicationDispense.fsh
+Profile: EPAMedicationDispense
+Parent: MedicationDispense
+Id: epa-medication-dispense
+Title: "EPA MedicationDispense"
+Description: "Defines the medication dispense resource for the Medication Service in the ePA system."
+* insert Meta
+* extension contains RxPrescriptionProcessIdentifierExtension named rxPrescriptionProcessIdentifier 0..1
+* extension[rxPrescriptionProcessIdentifier].value[x]
+* identifier ^slicing.discriminator.type = #pattern
+* identifier ^slicing.discriminator.path = "$this"
+* identifier ^slicing.rules = #open
+* identifier ^slicing.ordered = false
+* identifier 0..
+* identifier contains
+    RxOriginatorProcessIdentifier 0..1
+* identifier[RxOriginatorProcessIdentifier] only RxOriginatorProcessIdentifier
+* identifier[RxOriginatorProcessIdentifier] ^patternIdentifier.system = "https://gematik.de/fhir/epa-medication/sid/rx-originator-process-identifier"
+* status from EPAMedicationDispenseVS
+* medication[x] only Reference
+  * extension contains $data-absent-reason named dataAbsentReason 0..1 MS
+  * extension[dataAbsentReason].valueCode = #unsupported
+* medicationReference MS
+* medicationReference only Reference(Medication)
+* subject 1..1 MS
+  * identifier MS
+  * identifier only IdentifierKvid10
+    * insert PrivacyLabelPseudonymize
+* performer 1..1 MS
+  * actor only Reference(Organization)
+    * insert PrivacyLabelRedact
+* authorizingPrescription 0..
+  * reference 1.. MS
+* authorizingPrescription only Reference(MedicationRequest)
+* whenHandedOver 1.. MS
+* dosageInstruction MS
+* substitution MS
+
+# FSH Source: input/fsh/examples/ExampleEpaMedicationDispense1.fsh
+Instance: ExampleEPAMedicationDispense1Performer
+InstanceOf: Organization
+Usage: #example
+
+* id = "example-epa-medication-dispense-1-performer"
+* name = "Example EPA Pharmacy"
+* identifier.system = "https://gematik.de/fhir/sid/telematik-id"
+* identifier.value = "1-20123456790"
+
+
+Instance: ExampleEPAMedicationDispense1
+InstanceOf: EPAMedicationDispense
+Usage: #example
+
+* id = "example-epa-medication-dispense-1"
+* status = medicationdispense-status#completed
+* performer.actor = Reference(ExampleEPAMedicationDispense1Performer)
+* medicationReference = Reference(ExampleMedication2)
+* subject.identifier.value = "X123456789"
+* whenHandedOver[+] = 2025-01-15
+
+Instance: ExampleEPAMedicationDispense1Bundle
+InstanceOf: Bundle
+Usage: #example
+
+* id = "example-epa-medication-dispense-1-bundle"
+* type = bundle-type#collection
+* entry[+].resource = ExampleEPAMedicationDispense1
+
+</code></pre>
+</div>
+
+    
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>hljs.highlightAll();</script>
+
+</body>
+</html>
