@@ -35,11 +35,9 @@
                     </a>
                     <ul class="dropdown-menu">
                         
-                        <li><a class="dropdown-item" href="index.html">Privacy filter PoC</a></li>
+                        <li><a class="dropdown-item" href="index.html">Privacy filter PoC: Medication Request</a></li>
                         
-                        <li><a class="dropdown-item" href="EPAMedicationRequest1.html">Privacy filter PoC: EPA Medication Request</a></li>
-                        
-                        <li><a class="dropdown-item" href="EPAMedicationDispense1.html">Privacy filter PoC: EPA Medication Dispense</a></li>
+                        <li><a class="dropdown-item" href="MedicationDispense.html">Privacy filter PoC: Medication Dispense</a></li>
                         
                     </ul>
                 </li>
@@ -48,14 +46,14 @@
     </div>
 </nav>
 
-<h2 class="mt-4 mb-4">Privacy filter PoC</h2>
+<h2 class="mt-4 mb-4">Privacy filter PoC: Medication Request</h2>
 
 <div id="bundleDiff">
 </div>
 
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', () => {
-            const diffString = "--- FHIR.json\n+++ FHIR.json\n@@ -1,88 +1,88 @@\n {\n   \"resourceType\": \"Bundle\",\n   \"id\": \"ExampleConfidentialMedicationRequest1Bundle\",\n   \"type\": \"collection\",\n   \"entry\": [ {\n     \"resource\": {\n       \"resourceType\": \"MedicationRequest\",\n       \"id\": \"ExampleConfidentialMedicationRequest1\",\n       \"meta\": {\n-        \"profile\": [ \"https://gematik.de/fhir/epa-poc-privacy/StructureDefinition/ConfidentialMedicationRequest\" ]\n+        \"profile\": [ \"https://gematik.de/fhir/epa-poc-privacy/StructureDefinition/ConfidentialMedicationRequest\" ],\n+        \"security\": [ {\n+          \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ObservationValue\",\n+          \"code\": \"PSEUDED\",\n+          \"display\": \"pseudonymized\"\n+        } ]\n       },\n       \"status\": \"active\",\n       \"intent\": \"plan\",\n       \"medicationReference\": {\n         \"reference\": \"ExampleEpaMedication1\"\n       },\n       \"subject\": {\n         \"identifier\": {\n-          \"value\": \"X123456789\"\n+          \"value\": \"89f0f2dd\"\n         }\n       },\n       \"authoredOn\": \"2024-05-04\",\n       \"requester\": {\n-        \"reference\": \"PractitionerRole/ExampleConfidentialMedicationRequest1Requester\"\n+        \"reference\": \"PractitionerRole/a71104d8\"\n       },\n       \"dispenseRequest\": {\n         \"quantity\": {\n           \"value\": 3\n         }\n       }\n     }\n   }, {\n     \"resource\": {\n       \"resourceType\": \"Patient\",\n-      \"id\": \"ExampleConfidentialPatient1\",\n+      \"id\": \"1f8623b4\",\n       \"meta\": {\n-        \"profile\": [ \"https://gematik.de/fhir/epa-poc-privacy/StructureDefinition/ConfidentialPatient\" ]\n+        \"profile\": [ \"https://gematik.de/fhir/epa-poc-privacy/StructureDefinition/ConfidentialPatient\" ],\n+        \"security\": [ {\n+          \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ObservationValue\",\n+          \"code\": \"PSEUDED\",\n+          \"display\": \"pseudonymized\"\n+        } ]\n       },\n       \"identifier\": [ {\n         \"system\": \"http://fhir.de/sid/gkv/kvid-10\",\n-        \"value\": \"X123456789\"\n-      } ],\n-      \"name\": [ {\n-        \"family\": \"Duck\",\n-        \"given\": [ \"Daffy\" ]\n-      } ],\n-      \"contact\": [ {\n-        \"name\": {\n-          \"family\": \"Duck\",\n-          \"given\": [ \"Daffy\" ]\n-        },\n-        \"address\": {\n-          \"line\": [ \"123 Main St\" ],\n-          \"city\": \"Acmetropolis\",\n-          \"state\": \"CA\",\n-          \"postalCode\": \"90210\"\n-        }\n+        \"value\": \"89f0f2dd\"\n       } ]\n     }\n   }, {\n     \"resource\": {\n       \"resourceType\": \"PractitionerRole\",\n-      \"id\": \"ExampleConfidentialMedicationRequest1Requester\",\n+      \"id\": \"a71104d8\",\n       \"meta\": {\n-        \"profile\": [ \"https://gematik.de/fhir/epa-poc-privacy/StructureDefinition/ConfidentialPractitionerRole\" ]\n+        \"profile\": [ \"https://gematik.de/fhir/epa-poc-privacy/StructureDefinition/ConfidentialPractitionerRole\" ],\n+        \"security\": [ {\n+          \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ObservationValue\",\n+          \"code\": \"PSEUDED\",\n+          \"display\": \"pseudonymized\"\n+        } ]\n       },\n       \"practitioner\": {\n         \"reference\": \"Practitioner/ExampleConfidentialMedicationRequest1Practitioner\"\n       }\n     }\n   }, {\n     \"resource\": {\n       \"resourceType\": \"Practitioner\",\n-      \"id\": \"ExampleConfidentialMedicationRequest1Practitioner\",\n+      \"id\": \"bf2d1a28\",\n       \"meta\": {\n-        \"profile\": [ \"https://gematik.de/fhir/epa-poc-privacy/StructureDefinition/ConfidentialPractitioner\" ]\n+        \"profile\": [ \"https://gematik.de/fhir/epa-poc-privacy/StructureDefinition/ConfidentialPractitioner\" ],\n+        \"security\": [ {\n+          \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ObservationValue\",\n+          \"code\": \"PSEUDED\",\n+          \"display\": \"pseudonymized\"\n+        } ]\n       },\n       \"identifier\": [ {\n         \"system\": \"https://gematik.de/fhir/sid/telematik-id\",\n-        \"value\": \"1-10123456789\"\n-      } ],\n-      \"name\": [ {\n-        \"family\": \"Mustermann\",\n-        \"given\": [ \"Max\" ]\n+        \"value\": \"df8bcd5a\"\n       } ]\n     }\n   } ]\n }";
+            const diffString = "--- FHIR.json\n+++ FHIR.json\n@@ -1,124 +1,104 @@\n {\n   \"resourceType\": \"Bundle\",\n   \"id\": \"ExampleEPAMedicationRequestBundle\",\n   \"type\": \"collection\",\n   \"entry\": [ {\n     \"resource\": {\n       \"resourceType\": \"MedicationRequest\",\n       \"id\": \"bf1b08e5-5cfe-4ec0-b6b3-580d4bdc7975\",\n       \"meta\": {\n-        \"profile\": [ \"https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request\" ]\n+        \"profile\": [ \"https://gematik.de/fhir/epa-research/StructureDefinition/EPAResearchMedicationRequest\" ]\n       },\n       \"status\": \"active\",\n       \"intent\": \"plan\",\n       \"medicationReference\": {\n         \"reference\": \"Medication/50438bb0-34cd-4e48-a311-af6357f38681\"\n       },\n       \"subject\": {\n         \"identifier\": {\n           \"system\": \"http://fhir.de/sid/gkv/kvid-10\",\n-          \"value\": \"X123456789\"\n+          \"value\": \"90e6f046c50340c09ce3f810dde76a1a\"\n         }\n       },\n       \"authoredOn\": \"2024-07-01\",\n       \"requester\": {\n-        \"reference\": \"PractitionerRole/115aceb7-d4a9-4843-aa6a-96a6999a803c\"\n+        \"reference\": \"PractitionerRole/f7682c5bfd38402b93c04c01cfc2d167\"\n       },\n       \"dispenseRequest\": {\n         \"quantity\": {\n           \"value\": 3,\n           \"system\": \"http://unitsofmeasure.org\",\n           \"code\": \"{Package}\"\n         }\n       }\n     }\n   }, {\n     \"resource\": {\n       \"resourceType\": \"Medication\",\n       \"id\": \"50438bb0-34cd-4e48-a311-af6357f38681\",\n       \"meta\": {\n-        \"profile\": [ \"https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication\" ]\n+        \"profile\": [ \"https://gematik.de/fhir/epa-research/StructureDefinition/EPAResearchMedication\" ]\n       },\n       \"extension\": [ {\n         \"url\": \"https://gematik.de/fhir/epa-medication/StructureDefinition/rx-prescription-process-identifier-extension\",\n         \"valueIdentifier\": {\n           \"system\": \"https://gematik.de/fhir/epa-medication/sid/rx-prescription-process-identifier\",\n           \"value\": \"160.153.303.257.459_20240122\"\n         }\n       } ],\n       \"identifier\": [ {\n         \"system\": \"https://gematik.de/fhir/epa-medication/sid/epa-medication-unique-identifier\",\n         \"value\": \"583DC39E2BFFBFD6C05AE0AC404516309F56729EA44813F9FB881C73EE58EA5D\"\n       }, {\n         \"system\": \"https://gematik.de/fhir/epa-medication/sid/rx-originator-process-identifier\",\n         \"value\": \"6ae6a7ca-c9b5-46bf-9411-2ba49d96f988_160.153.303.257.459\"\n       } ],\n       \"code\": {\n         \"coding\": [ {\n           \"system\": \"http://fhir.de/CodeSystem/ask\",\n           \"code\": \"5682\",\n           \"display\": \"Ibuprofen\"\n         } ]\n       },\n       \"status\": \"active\"\n     }\n   }, {\n     \"resource\": {\n       \"resourceType\": \"PractitionerRole\",\n       \"id\": \"115aceb7-d4a9-4843-aa6a-96a6999a803c\",\n       \"meta\": {\n-        \"profile\": [ \"https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory\" ],\n+        \"profile\": [ \"https://gematik.de/fhir/epa-research/StructureDefinition/EPAResearchPractitionerRole\" ],\n         \"tag\": [ {\n           \"system\": \"https://gematik.de/fhir/directory/CodeSystem/Origin\",\n           \"code\": \"ldap\"\n         } ]\n       },\n       \"practitioner\": {\n-        \"reference\": \"Practitioner/e94eb9b2-a8ac-4077-ba64-51af77a031f0\"\n-      },\n-      \"location\": [ {\n-        \"reference\": \"Location/5541eeb9-4b4f-4f0c-bdd3-53dc0280898b\"\n-      } ]\n+        \"reference\": \"Practitioner/379e8de193a741abb4f23d72f93b1291\"\n+      }\n     }\n   }, {\n     \"resource\": {\n       \"resourceType\": \"Practitioner\",\n-      \"id\": \"e94eb9b2-a8ac-4077-ba64-51af77a031f0\",\n+      \"id\": \"379e8de193a741abb4f23d72f93b1291\",\n       \"meta\": {\n-        \"profile\": [ \"https://gematik.de/fhir/directory/StructureDefinition/PractitionerDirectory\" ],\n-        \"tag\": [ {\n-          \"system\": \"https://gematik.de/fhir/directory/CodeSystem/Origin\",\n-          \"code\": \"ldap\"\n-        } ]\n+        \"profile\": [ \"https://gematik.de/fhir/epa-research/StructureDefinition/EPAResearchPractitioner\" ]\n       },\n-      \"identifier\": [ {\n-        \"system\": \"https://gematik.de/fhir/sid/telematik-id\",\n-        \"value\": \"1-1012345678\"\n-      }, {\n-        \"system\": \"https://fhir.kbv.de/NamingSystem/KBV_NS_Base_ANR\",\n-        \"value\": \"123456789\"\n-      } ],\n-      \"name\": [ {\n-        \"text\": \"Dr. Max Manfred Mustermann\",\n-        \"family\": \"Musterman\",\n-        \"given\": [ \"Max\", \"Manfred\" ],\n-        \"prefix\": [ \"Dr.\" ]\n-      } ],\n       \"qualification\": [ {\n         \"code\": {\n           \"coding\": [ {\n             \"system\": \"urn:oid:1.2.276.0.76.5.114\",\n             \"code\": \"010\"\n           } ]\n         }\n       }, {\n         \"code\": {\n           \"coding\": [ {\n             \"system\": \"https://gematik.de/fhir/directory/CodeSystem/PractitionerProfessionOID\",\n             \"code\": \"1.2.276.0.76.4.30\"\n           } ]\n         }\n       } ]\n     }\n   } ]\n }";
             const targetElement = document.getElementById('bundleDiff');
             var configuration = {
                 drawFileList: false,
@@ -84,24 +82,7 @@
         <div class="col-xl-6">
             <h4>Validation after filter</h4>
             
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Severity</th>
-                        <th>Location</th>
-                        <th>Message</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    
-                        <tr>
-                            <td class="WARNING">WARNING</td>
-                            <td>Patient.identifier[0].value</td>
-                            <td>Rule kvid-1: 'Der unveränderliche Teil der KVID muss 10-stellig sein und mit einem Großbuchstaben anfangen' Failed</td>
-                        </tr>
-                    
-                    </tbody>
-                </table>
+                <p class="text-success">Bundle is valid</p>
             
             <h4 class="mt-4">Filtered values</h4>
             <table class="table">
@@ -124,33 +105,13 @@
                     </tr>
                 
                     <tr>
-                        <td>Patient.id</td>
+                        <td>PractitionerRole.practitioner.reference</td>
                         <td class="INFO">Pseudonymize</td>
                     </tr>
                 
                     <tr>
-                        <td>Patient.identifier</td>
-                        <td class="INFO">Pseudonymize</td>
-                    </tr>
-                
-                    <tr>
-                        <td>Patient.name</td>
+                        <td>PractitionerRole.location</td>
                         <td class="INFO">Redact</td>
-                    </tr>
-                
-                    <tr>
-                        <td>Patient.contact</td>
-                        <td class="INFO">Redact</td>
-                    </tr>
-                
-                    <tr>
-                        <td>PractitionerRole.id</td>
-                        <td class="INFO">Pseudonymize</td>
-                    </tr>
-                
-                    <tr>
-                        <td>PractitionerRole.identifier</td>
-                        <td class="INFO">Pseudonymize</td>
                     </tr>
                 
                     <tr>
@@ -159,13 +120,45 @@
                     </tr>
                 
                     <tr>
+                        <td>Practitioner.meta.tag</td>
+                        <td class="INFO">Redact</td>
+                    </tr>
+                
+                    <tr>
                         <td>Practitioner.identifier</td>
-                        <td class="INFO">Pseudonymize</td>
+                        <td class="INFO">Redact</td>
                     </tr>
                 
                     <tr>
                         <td>Practitioner.name</td>
                         <td class="INFO">Redact</td>
+                    </tr>
+                
+                </tbody>
+            </table>
+            <h4 class="mt-4">Pseudonyms</h4>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Pseudonym</th>
+                    <th>Value</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                    <tr>
+                        <td>90e6f046c50340c09ce3f810dde76a1a</td>
+                        <td>X123456789</td>
+                    </tr>
+                
+                    <tr>
+                        <td>f7682c5bfd38402b93c04c01cfc2d167</td>
+                        <td>115aceb7-d4a9-4843-aa6a-96a6999a803c</td>
+                    </tr>
+                
+                    <tr>
+                        <td>379e8de193a741abb4f23d72f93b1291</td>
+                        <td>e94eb9b2-a8ac-4077-ba64-51af77a031f0</td>
                     </tr>
                 
                 </tbody>
@@ -176,77 +169,103 @@
 
     
     
-<h2 class="mt-4 mb-4">FHIR Shorthand</h2>
-<div>
-    <pre><code class="yaml"># FSH Source: input/fsh/ConfidentialMedication1.fsh
-Profile: ConfidentialPractitioner
-Parent: Practitioner
-
-* id
-  * insert PrivacyLabelPseudonymize
-* identifier
-  * insert PrivacyLabelPseudonymize
-* name
-  * insert PrivacyLabelRedact
-
-
-Instance: ExampleConfidentialMedicationRequest1Practitioner
-InstanceOf: ConfidentialPractitioner
-Usage: #example
-
-* identifier.system = "https://gematik.de/fhir/sid/telematik-id"
-* identifier.value = "1-10123456789"
-* name.family = "Mustermann"
-* name.given[+] = "Max"
-
-Profile: ConfidentialPractitionerRole
-Parent: PractitionerRole
-
-* id
-  * insert PrivacyLabelPseudonymize
-* identifier
-  * insert PrivacyLabelPseudonymize
-
-Instance: ExampleConfidentialMedicationRequest1Requester
-InstanceOf: ConfidentialPractitionerRole
-Usage: #example
-
-* practitioner = Reference(ExampleConfidentialMedicationRequest1Practitioner)
-
-Profile: ConfidentialMedicationRequest
+<h2 class="mt-4 mb-4">Sources</h2>
+    
+        <h3>Profile EPAResearchMedicationRequest</h3>
+        <div>
+            <pre><code class="fsh">Profile: EPAResearchMedicationRequest
 Parent: MedicationRequest
 
 * subject.identifier
   * insert PrivacyLabelPseudonymize
 * requester.reference
   * insert PrivacyLabelPseudonymize
+</code></pre>
+        </div>
+    
+        <h3>Example EPAMedicationRequest</h3>
+        <div>
+            <pre><code class="fsh">Instance: ExampleEPAMedicationRequestMedication
+InstanceOf: EPAMedication
+Usage: #example
+* id = "50438bb0-34cd-4e48-a311-af6357f38681"
+* extension[rxPrescriptionProcessIdentifier].valueIdentifier.value = "160.153.303.257.459_20240122"
+* identifier[EPAMedicationUniqueIdentifier].value = "583DC39E2BFFBFD6C05AE0AC404516309F56729EA44813F9FB881C73EE58EA5D"
+* identifier[RxOriginatorProcessIdentifier].value = "6ae6a7ca-c9b5-46bf-9411-2ba49d96f988_160.153.303.257.459"
+* status = #active
+* code.coding
+  * system = $cs-ask
+  * code = #5682
+  * display = "Ibuprofen"
 
-Instance: ExampleConfidentialMedicationRequest1
-InstanceOf: ConfidentialMedicationRequest
+Instance: ExampleEPAMedicationRequest
+InstanceOf: EPAMedicationRequest
 Usage: #example
 
+* id = "bf1b08e5-5cfe-4ec0-b6b3-580d4bdc7975"
 * status = medicationrequest-status#active
 * intent = http://hl7.org/fhir/CodeSystem/medicationrequest-intent#plan
-* medicationReference = Reference(ExampleEpaMedication1)
-* subject.identifier.vtagalue = "X123456789"
-* authoredOn = 2024-05-04
+* medicationReference = Reference(ExampleEPAMedicationRequestMedication)
+* subject.identifier.value = "X123456789"
+* authoredOn = 2024-07-01
 * dispenseRequest.quantity.value = 3
-* requester = Reference(ExampleConfidentialMedicationRequest1Requester)
+* requester = Reference(ExampleEPAPractitionerRole)
 
-Instance: ExampleConfidentialMedicationRequest1Bundle
+Instance: ExampleEPAMedicationRequestBundle
 InstanceOf: Bundle
 Usage: #example
 
-* type = bundle-type#collection
-* entry[+].resource = ExampleConfidentialMedicationRequest1
-* entry[+].resource = ExampleConfidentialPatient1
-* entry[+].resource = ExampleConfidentialMedicationRequest1Requester
-* entry[+].resource = ExampleConfidentialMedicationRequest1Practitioner
-
+* type = #collection
+* entry[+].resource = ExampleEPAMedicationRequest
+* entry[+].resource = ExampleEPAMedicationRequestMedication
+* entry[+].resource = ExampleEPAPractitionerRole
+* entry[+].resource = ExampleEPAPractitioner
 </code></pre>
-</div>
-
+        </div>
     
+        <h3>Example EPAPractioner</h3>
+        <div>
+            <pre><code class="fsh">Instance: ExampleEPAPractitioner
+InstanceOf: PractitionerDirectory
+
+* meta.tag[Origin] = Origin#ldap
+* id = "e94eb9b2-a8ac-4077-ba64-51af77a031f0"
+* identifier[TelematikID].value = "1-1012345678"
+* identifier[LANR].value = "123456789"
+* name
+  * prefix = "Dr."
+  * given[+] = "Max"
+  * given[+] = "Manfred"
+  * family = "Musterman"
+  * text = "Dr. Max Manfred Mustermann"
+* qualification[+].code = urn:oid:1.2.276.0.76.5.114#010
+* qualification[+].code = PractitionerProfessionOID#1.2.276.0.76.4.30
+
+Instance: ExampleEPAPractitionerLocation
+InstanceOf: LocationDirectory
+
+* id = "5541eeb9-4b4f-4f0c-bdd3-53dc0280898b"
+* meta.tag[Origin] = Origin#ldap
+* address
+  * use = #work
+  * type = #both
+  * text = "Raiffeisenstr. 42&amp;#13;&amp;#10;10123 Berlin&amp;#13;&amp;#10;Berlin&amp;#13;&amp;#10;DE"
+  * line[+] = "Raiffeisenstr. 42"
+  * city = "Berlin"
+  * state = Region#Berlin
+  * postalCode = "10123"
+  * country = "DE"
+
+Instance: ExampleEPAPractitionerRole
+InstanceOf: PractitionerRoleDirectory
+
+* id = "115aceb7-d4a9-4843-aa6a-96a6999a803c"
+* meta.tag[Origin] = Origin#ldap
+* practitioner = Reference(ExampleEPAPractitioner)
+* location[+] = Reference(ExampleEPAPractitionerLocation)</code></pre>
+        </div>
+    
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
