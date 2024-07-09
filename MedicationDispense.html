@@ -50,11 +50,105 @@
 
 <h2 class="mt-4 mb-4">Privacy filter PoC: Medication Dispense</h2>
 
-<h2 class="mt-4 mb-4">Sources</h2>
+    <h3 class="mt-4">Filtered values</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Path</th>
+            <th>Privacy Filter</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <td>MedicationDispense.id</td>
+                <td class="INFO">Pseudonymize</td>
+            </tr>
+        
+            <tr>
+                <td>MedicationDispense.identifier</td>
+                <td class="INFO">Redact</td>
+            </tr>
+        
+            <tr>
+                <td>MedicationDispense.subject.identifier</td>
+                <td class="INFO">Pseudonymize</td>
+            </tr>
+        
+            <tr>
+                <td>MedicationDispense.performer</td>
+                <td class="INFO">Redact</td>
+            </tr>
+        
+        </tbody>
+    </table>
+    <h3 class="mt-4">Job Numbers (Arbeitsnummer)</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Job Number</th>
+            <th>Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <td>8a6af75b-e86d-4c4a-a0b1-8a7289289def</td>
+                <td>cd6c2892-eef2-4eed-8b82-1b15e8e0fd4f</td>
+            </tr>
+        
+            <tr>
+                <td>1eea11b1-56e9-4ea1-bfe0-ac47203b6cbe</td>
+                <td>X123456789</td>
+            </tr>
+        
+        </tbody>
+    </table>
 
-    <h3>Privacy Label Extension</h3>
-    <div>
-        <pre><code class="language-vbnet">Extension: PrivacyLabelExtension
+    <div id="bundleDiff" class="mt-4">
+    </div>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            const diffString = "--- FHIR.json\n+++ FHIR.json\n@@ -1,84 +1,63 @@\n {\n   \"resourceType\": \"Bundle\",\n   \"id\": \"ExampleEPAMedicationDispenseBundle\",\n   \"type\": \"collection\",\n   \"entry\": [ {\n     \"resource\": {\n       \"resourceType\": \"MedicationDispense\",\n-      \"id\": \"cd6c2892-eef2-4eed-8b82-1b15e8e0fd4f\",\n+      \"id\": \"8a6af75b-e86d-4c4a-a0b1-8a7289289def\",\n       \"meta\": {\n-        \"profile\": [ \"https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense\" ]\n+        \"profile\": [ \"https://gematik.de/fhir/epa-research/StructureDefinition/epa-research-medication-dispense\" ],\n+        \"tag\": [ {\n+          \"system\": \"https://gematik.de/fhir/epa-research/sid/source-profile\",\n+          \"code\": \"https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense\"\n+        } ]\n       },\n       \"status\": \"completed\",\n       \"medicationReference\": {\n         \"reference\": \"Medication/6b0350b6-f5ab-495b-9aeb-1806170a814f\"\n       },\n       \"subject\": {\n         \"identifier\": {\n-          \"system\": \"http://fhir.de/sid/gkv/kvid-10\",\n-          \"value\": \"X123456789\"\n+          \"system\": \"https://gematik.de/fhir/epa-research/sid/job-number-identifier\",\n+          \"value\": \"1eea11b1-56e9-4ea1-bfe0-ac47203b6cbe\"\n         }\n       },\n-      \"performer\": [ {\n-        \"actor\": {\n-          \"reference\": \"Organization/e6b0cd54-a6f2-4b8c-ad68-76c3ae953b3e\"\n-        }\n-      } ],\n       \"whenHandedOver\": \"2025-01-15\"\n     }\n   }, {\n     \"resource\": {\n       \"resourceType\": \"Medication\",\n       \"id\": \"6b0350b6-f5ab-495b-9aeb-1806170a814f\",\n       \"meta\": {\n-        \"profile\": [ \"https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication\" ]\n+        \"profile\": [ \"https://gematik.de/fhir/epa-research/StructureDefinition/epa-research-medication\" ],\n+        \"tag\": [ {\n+          \"system\": \"https://gematik.de/fhir/epa-research/sid/source-profile\",\n+          \"code\": \"https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication\"\n+        } ]\n       },\n       \"extension\": [ {\n         \"url\": \"https://gematik.de/fhir/epa-medication/StructureDefinition/rx-prescription-process-identifier-extension\",\n         \"valueIdentifier\": {\n           \"system\": \"https://gematik.de/fhir/epa-medication/sid/rx-prescription-process-identifier\",\n           \"value\": \"160.153.303.257.459_20240122\"\n         }\n       } ],\n       \"identifier\": [ {\n         \"system\": \"https://gematik.de/fhir/epa-medication/sid/epa-medication-unique-identifier\",\n         \"value\": \"583DC39E2BFFBFD6C05AE0AC404516309F56729EA44813F9FB881C73EE58EA5D\"\n       }, {\n         \"system\": \"https://gematik.de/fhir/epa-medication/sid/rx-originator-process-identifier\",\n         \"value\": \"6ae6a7ca-c9b5-46bf-9411-2ba49d96f988_160.153.303.257.459\"\n       } ],\n       \"code\": {\n         \"coding\": [ {\n           \"system\": \"http://fhir.de/CodeSystem/ask\",\n           \"code\": \"5682\",\n           \"display\": \"Ibuprofen\"\n         } ]\n       },\n       \"status\": \"active\"\n     }\n-  }, {\n-    \"resource\": {\n-      \"resourceType\": \"Organization\",\n-      \"id\": \"e6b0cd54-a6f2-4b8c-ad68-76c3ae953b3e\",\n-      \"meta\": {\n-        \"profile\": [ \"https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory\" ],\n-        \"tag\": [ {\n-          \"system\": \"https://gematik.de/fhir/directory/CodeSystem/Origin\",\n-          \"code\": \"ldap\"\n-        } ]\n-      },\n-      \"identifier\": [ {\n-        \"system\": \"https://gematik.de/fhir/sid/telematik-id\",\n-        \"value\": \"3-21234567890\"\n-      } ],\n-      \"type\": [ {\n-        \"coding\": [ {\n-          \"system\": \"https://gematik.de/fhir/directory/CodeSystem/OrganizationProfessionOID\",\n-          \"code\": \"1.2.276.0.76.4.54\",\n-          \"display\": \"Öffentliche Apotheke\"\n-        } ]\n-      } ],\n-      \"name\": \"Example EPA Pharmacy\"\n-    }\n   } ]\n }";
+            const targetElement = document.getElementById('bundleDiff');
+            var configuration = {
+                drawFileList: false,
+                fileListToggle: false,
+                fileListStartVisible: false,
+                fileContentToggle: false,
+                matching: 'lines',
+                outputFormat: 'side-by-side',
+                synchronisedScroll: true,
+                highlight: true,
+                colorScheme: 'dark',
+                renderNothingWhenEmpty: false,
+              };
+            const diff2htmlUi = new Diff2HtmlUI(targetElement, diffString, configuration);
+            diff2htmlUi.draw();
+            diff2htmlUi.highlightCode();
+        });
+    </script>
+    <div class="row">
+        <div class="col-xl-6">
+            <h4>Validation before filter</h4>
+            
+                <p class="text-success">Bundle is valid</p>
+            
+        </div>
+        <div class="col-xl-6">
+            <h4>Validation after filter</h4>
+            
+                <p class="text-success">Bundle is valid</p>
+            
+
+        </div>
+
+        <h2 class="mt-4 mb-4">Sources</h2>
+        
+            <h3>Privacy Label Extension</h3>
+            <div>
+                <pre><code class="language-vbnet">Extension: PrivacyLabelExtension
 Id: privacy-label-extension
 Context: ElementDefinition
 
@@ -64,11 +158,11 @@ Context: ElementDefinition
 * extension[obligationPolicy].value[x] only Coding
 * extension[obligationPolicy].value[x] from $vs-v3-ObligationPolicy
 </code></pre>
-    </div>
-
-    <h3>Privacy Rule Sets</h3>
-    <div>
-        <pre><code class="language-vbnet">RuleSet: PrivacyLabelPseudonymize
+            </div>
+        
+            <h3>Privacy Rule Sets</h3>
+            <div>
+                <pre><code class="language-vbnet">RuleSet: PrivacyLabelPseudonymize
 * ^extension[PrivacyLabelExtension].extension[obligationPolicy].valueCoding = $cs-v3-act-code#PSEUD
 
 RuleSet: PrivacyLabelAnonymizeString(dummyValue)
@@ -78,23 +172,29 @@ RuleSet: PrivacyLabelAnonymizeString(dummyValue)
 RuleSet: PrivacyLabelRedact
 * ^extension[PrivacyLabelExtension].extension[obligationPolicy].valueCoding = $cs-v3-act-code#REDACT
 </code></pre>
-    </div>
-
-    <h3>Profile EPAResearchMedicationDispense</h3>
-    <div>
-        <pre><code class="language-vbnet">Profile: EPAResearchMedicationDispense
+            </div>
+        
+            <h3>Profile EPAResearchMedicationDispense</h3>
+            <div>
+                <pre><code class="language-vbnet">Profile: EPAResearchMedicationDispense
 Id: epa-research-medication-dispense
 Parent: MedicationDispense
 
+* insert MetaSourceProfile
+  
+* id
+  * insert PrivacyLabelPseudonymize
+* identifier
+  * insert PrivacyLabelRedact  
 * subject.identifier
   * insert PrivacyLabelPseudonymize
 * performer 0..0
 </code></pre>
-    </div>
-
-    <h3>Example EPAMedicationDispense</h3>
-    <div>
-        <pre><code class="language-vbnet">Instance: ExampleEPAMedicationDispenseMedication
+            </div>
+        
+            <h3>Example EPAMedicationDispense</h3>
+            <div>
+                <pre><code class="language-vbnet">Instance: ExampleEPAMedicationDispenseMedication
 InstanceOf: EPAMedication
 Usage: #example
 * id = "6b0350b6-f5ab-495b-9aeb-1806170a814f"
@@ -135,11 +235,11 @@ Usage: #example
 * entry[+].resource = ExampleEPAMedicationDispense
 * entry[+].resource = ExampleEPAMedicationDispenseMedication
 * entry[+].resource = ExampleEPAMedicationDispensePerformer</code></pre>
-    </div>
+            </div>
+        
 
-
-<h3 class="mt-4 mb-4">ePA Resources</h3>
-<pre><code class="language-json">{
+        <h3 class="mt-4 mb-4">ePA Resources</h3>
+        <pre><code class="language-json">{
   "resourceType": "Bundle",
   "id": "ExampleEPAMedicationDispenseBundle",
   "type": "collection",
@@ -224,84 +324,6 @@ Usage: #example
   } ]
 }</code></pre>
 
-    <h3 class="mt-4">Filtered values</h3>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Path</th>
-            <th>Privacy Filter</th>
-        </tr>
-        </thead>
-        <tbody>
-        
-            <tr>
-                <td>MedicationDispense.subject.identifier</td>
-                <td class="INFO">Pseudonymize</td>
-            </tr>
-        
-            <tr>
-                <td>MedicationDispense.performer</td>
-                <td class="INFO">Redact</td>
-            </tr>
-        
-        </tbody>
-    </table>
-    <h3 class="mt-4">Job Numbers (Arbeitsnummer)</h3>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Job Number</th>
-            <th>Value</th>
-        </tr>
-        </thead>
-        <tbody>
-        
-            <tr>
-                <td>db603ccf-3c88-4bf3-89a5-1ea9a9ca6df6</td>
-                <td>X123456789</td>
-            </tr>
-        
-        </tbody>
-    </table>
-
-    <div id="bundleDiff" class="mt-4">
-    </div>
-
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', () => {
-            const diffString = "--- FHIR.json\n+++ FHIR.json\n@@ -1,84 +1,63 @@\n {\n   \"resourceType\": \"Bundle\",\n   \"id\": \"ExampleEPAMedicationDispenseBundle\",\n   \"type\": \"collection\",\n   \"entry\": [ {\n     \"resource\": {\n       \"resourceType\": \"MedicationDispense\",\n       \"id\": \"cd6c2892-eef2-4eed-8b82-1b15e8e0fd4f\",\n       \"meta\": {\n-        \"profile\": [ \"https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense\" ]\n+        \"profile\": [ \"https://gematik.de/fhir/epa-research/StructureDefinition/epa-research-medication-dispense\" ],\n+        \"tag\": [ {\n+          \"system\": \"https://gematik.de/fhir/epa-research/sid/source-profile\",\n+          \"code\": \"https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense\"\n+        } ]\n       },\n       \"status\": \"completed\",\n       \"medicationReference\": {\n         \"reference\": \"Medication/6b0350b6-f5ab-495b-9aeb-1806170a814f\"\n       },\n       \"subject\": {\n         \"identifier\": {\n-          \"system\": \"http://fhir.de/sid/gkv/kvid-10\",\n-          \"value\": \"X123456789\"\n+          \"system\": \"https://gematik.de/fhir/epa-research/sid/job-number-identifier\",\n+          \"value\": \"db603ccf-3c88-4bf3-89a5-1ea9a9ca6df6\"\n         }\n       },\n-      \"performer\": [ {\n-        \"actor\": {\n-          \"reference\": \"Organization/e6b0cd54-a6f2-4b8c-ad68-76c3ae953b3e\"\n-        }\n-      } ],\n       \"whenHandedOver\": \"2025-01-15\"\n     }\n   }, {\n     \"resource\": {\n       \"resourceType\": \"Medication\",\n       \"id\": \"6b0350b6-f5ab-495b-9aeb-1806170a814f\",\n       \"meta\": {\n-        \"profile\": [ \"https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication\" ]\n+        \"profile\": [ \"https://gematik.de/fhir/epa-research/StructureDefinition/epa-research-medication\" ],\n+        \"tag\": [ {\n+          \"system\": \"https://gematik.de/fhir/epa-research/sid/source-profile\",\n+          \"code\": \"https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication\"\n+        } ]\n       },\n       \"extension\": [ {\n         \"url\": \"https://gematik.de/fhir/epa-medication/StructureDefinition/rx-prescription-process-identifier-extension\",\n         \"valueIdentifier\": {\n           \"system\": \"https://gematik.de/fhir/epa-medication/sid/rx-prescription-process-identifier\",\n           \"value\": \"160.153.303.257.459_20240122\"\n         }\n       } ],\n       \"identifier\": [ {\n         \"system\": \"https://gematik.de/fhir/epa-medication/sid/epa-medication-unique-identifier\",\n         \"value\": \"583DC39E2BFFBFD6C05AE0AC404516309F56729EA44813F9FB881C73EE58EA5D\"\n       }, {\n         \"system\": \"https://gematik.de/fhir/epa-medication/sid/rx-originator-process-identifier\",\n         \"value\": \"6ae6a7ca-c9b5-46bf-9411-2ba49d96f988_160.153.303.257.459\"\n       } ],\n       \"code\": {\n         \"coding\": [ {\n           \"system\": \"http://fhir.de/CodeSystem/ask\",\n           \"code\": \"5682\",\n           \"display\": \"Ibuprofen\"\n         } ]\n       },\n       \"status\": \"active\"\n     }\n-  }, {\n-    \"resource\": {\n-      \"resourceType\": \"Organization\",\n-      \"id\": \"e6b0cd54-a6f2-4b8c-ad68-76c3ae953b3e\",\n-      \"meta\": {\n-        \"profile\": [ \"https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory\" ],\n-        \"tag\": [ {\n-          \"system\": \"https://gematik.de/fhir/directory/CodeSystem/Origin\",\n-          \"code\": \"ldap\"\n-        } ]\n-      },\n-      \"identifier\": [ {\n-        \"system\": \"https://gematik.de/fhir/sid/telematik-id\",\n-        \"value\": \"3-21234567890\"\n-      } ],\n-      \"type\": [ {\n-        \"coding\": [ {\n-          \"system\": \"https://gematik.de/fhir/directory/CodeSystem/OrganizationProfessionOID\",\n-          \"code\": \"1.2.276.0.76.4.54\",\n-          \"display\": \"Öffentliche Apotheke\"\n-        } ]\n-      } ],\n-      \"name\": \"Example EPA Pharmacy\"\n-    }\n   } ]\n }";
-            const targetElement = document.getElementById('bundleDiff');
-            var configuration = {
-                drawFileList: false,
-                fileListToggle: false,
-                fileListStartVisible: false,
-                fileContentToggle: false,
-                matching: 'lines',
-                outputFormat: 'side-by-side',
-                synchronisedScroll: true,
-                highlight: true,
-                colorScheme: 'dark',
-                renderNothingWhenEmpty: false,
-              };
-            const diff2htmlUi = new Diff2HtmlUI(targetElement, diffString, configuration);
-            diff2htmlUi.draw();
-            diff2htmlUi.highlightCode();
-        });
-    </script>
-    <div class="row">
-        <div class="col-xl-6">
-            <h4>Validation before filter</h4>
-            
-                <p class="text-success">Bundle is valid</p>
-            
-        </div>
-        <div class="col-xl-6">
-            <h4>Validation after filter</h4>
-            
-                <p class="text-success">Bundle is valid</p>
-            
-
-        </div>
     </div>
 
     
